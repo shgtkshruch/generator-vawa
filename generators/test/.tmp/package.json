@@ -1,0 +1,17 @@
+{
+  "name": "tmp",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-coffee": "*",
+    "gulp-ruby-sass": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-plumber": "*",
+    "gulp-load-plugins": "*",
+    "browser-sync": "*",
+    "coffee-script": "*"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
+

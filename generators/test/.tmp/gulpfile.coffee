@@ -5,7 +5,7 @@ $ = require('gulp-load-plugins')()
 browserSync = require 'browser-sync'
 
 config = 
-  SOURCE: '<%= themeName %>'
+  SOURCE: 'my_wordpress_theme'
 
 gulp.task 'browser-sync', ->
   browserSync

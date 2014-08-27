@@ -7,6 +7,23 @@ module.exports = yeoman.generators.Base.extend({
     this.option('coffee');
   },
 
+  askFor: function() {
+    var done = this.async();
+
+    var prompts = [{
+      type: 'input',
+      name: 'themeName',
+      message: 'What yout theme name?',
+      value: 'themeName'
+    }] 
+
+    this.prompt(prompts, function(answers) {
+      this.themeName = answers.themeName;
+
+      done();
+    }.bind(this));
+  },
+
   packageJSON: function() {
     this.copy('_package.json', 'package.json');
   },
