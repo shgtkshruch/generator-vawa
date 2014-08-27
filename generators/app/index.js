@@ -7,9 +7,4 @@ module.exports = yeoman.generators.Base.extend({
     this.option('coffee');
   },
 
-  method1: function() {
-    console.log('method1');
-  }
-
-
 });
