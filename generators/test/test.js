@@ -15,6 +15,7 @@ describe('WordPress generator', function() {
 
   describe('run test', function() {
     var expected = [
+      'package.json',
       '.gitignore'
     ];
 
