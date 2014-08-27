@@ -14,6 +14,10 @@ describe('WordPress generator', function() {
   });
 
   describe('run test', function() {
+    var expectedContent = [
+      ['gulpfile.coffee', /SOURCE: 'tmp'/]
+    ];
+
     var expected = [
       'package.json',
       '.gitignore'

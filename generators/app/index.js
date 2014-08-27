@@ -13,6 +13,10 @@ module.exports = yeoman.generators.Base.extend({
 
   git: function() {
     this.copy('gitignore', '.gitignore');
+  },
+
+  gulp: function() {
+    this.template('gulpfile.coffee', 'gulpfile.coffee');
   }
 
 });
