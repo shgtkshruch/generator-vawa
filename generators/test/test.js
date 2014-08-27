@@ -4,12 +4,15 @@ var assert = require('yeoman-generator').assert;
 
 describe('WordPress generator', function() {
 
-
   describe('run test', function() {
     var themeName = 'my_wordpress_theme'
-    var exp = new RegExp('SOURCE: \'' + themeName + '\'');
+
+    var gulpExp = new RegExp('SOURCE: \'' + themeName + '\'');
+    var themeExp = new RegExp('Theme Name: ' + themeName);
+
     var expectedContent = [
-      ['gulpfile.coffee', exp]
+      ['gulpfile.coffee', gulpExp],
+      [themeName + '/styles/style.scss', themeExp]
     ];
 
     var expected = [
@@ -29,12 +32,14 @@ describe('WordPress generator', function() {
 
     it('creates expected files', function(done) {
       runGen.withOptions().withPrompt({themeName: themeName}).on('end', function() {
-        assert.file(expected);
+        assert.file([].concat(
+          expected,
+          themeName + '/styles/style.scss' 
+        ));
         assert.fileContent(expectedContent);
         done();
       });
     });
 
   });
-  
 });

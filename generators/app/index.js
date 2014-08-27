@@ -34,6 +34,12 @@ module.exports = yeoman.generators.Base.extend({
 
   gulp: function() {
     this.template('gulpfile.coffee', 'gulpfile.coffee');
+  },
+
+  app: function() {
+    this.directory(this.themeName);
+    this.mkdir('styles');
+    this.template('style.scss', this.themeName + '/styles/style.scss');
   }
 
 });
