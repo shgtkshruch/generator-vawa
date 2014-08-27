@@ -1,0 +1,2 @@
+describe('WordPress generator', function() {
+});
