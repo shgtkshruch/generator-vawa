@@ -1,7 +1,6 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 
-
 describe('WordPress generator', function() {
 
   var runGen;
@@ -10,14 +9,21 @@ describe('WordPress generator', function() {
     console.log('before each');
     runGen = helpers
       .run(path.join(__dirname, '../app'))
-      // .withGenerators([[helpers.createDummyGenerator(), 'mocha:app']]);
+      .inDir(path.join(__dirname, '.tmp'))
+      .withGenerators([[helpers.createDummyGenerator(), 'mocha:app']]);
   });
 
-  it('test1', function(done) {
-    runGen.withOptions().on('end', function() {
-      console.log('test1');
-      done();
+  describe('run test', function() {
+    var expected = [
+      '.gitignore'
+    ];
+
+    it('creates expected files', function() {
+      runGen.withOptions().on('end', function() {
+        assert.file(expected);
+      });
     });
+
   });
   
 });

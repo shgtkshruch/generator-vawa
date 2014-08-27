@@ -7,4 +7,12 @@ module.exports = yeoman.generators.Base.extend({
     this.option('coffee');
   },
 
+  packageJSON: function() {
+    this.copy('_package.json', 'package.json');
+  },
+
+  git: function() {
+    this.copy('gitignore', '.gitignore');
+  }
+
 });
