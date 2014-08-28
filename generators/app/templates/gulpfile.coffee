@@ -27,6 +27,13 @@ gulp.task 'sass', ->
     .pipe browserSync.reload
       stream: true
 
+gulp.task 'copy', ->
+  gulp.src config.src + '/**/*.php'
+    .pipe gulp.dest config.theme
+
 gulp.task 'default', ['browser-sync'], ->
   gulp.watch config.src + '/**/*', ['bs-reload']
   gulp.watch config.src + '/**/*.scss', ['sass', 'bs-reload']
+
+gulp.task 'build', ['sass', 'copy']
+
