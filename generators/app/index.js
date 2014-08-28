@@ -37,9 +37,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   app: function() {
-    this.mkdir(this.themeName);
-    this.mkdir('styles');
-    this.template('style.scss', this.themeName + '/styles/style.scss');
+    this.template('style.scss', 'src/styles/style.scss');
   },
 
   end: function() {

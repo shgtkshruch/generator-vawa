@@ -7,12 +7,12 @@ describe('WordPress generator', function() {
   describe('run test', function() {
     var themeName = 'my_wordpress_theme'
 
-    var gulpExp = new RegExp('SOURCE: \'' + themeName + '\'');
+    var gulpExp = new RegExp('theme: \'' + themeName + '\'');
     var themeExp = new RegExp('Theme Name: ' + themeName);
 
     var expectedContent = [
       ['gulpfile.coffee', gulpExp],
-      [themeName + '/styles/style.scss', themeExp]
+      ['src/styles/style.scss', themeExp]
     ];
 
     var expected = [
@@ -39,7 +39,7 @@ describe('WordPress generator', function() {
       runGen.withOptions(options).withPrompt({themeName: themeName}).on('end', function() {
         assert.file([].concat(
           expected,
-          themeName + '/styles/style.scss' 
+          'src/styles/style.scss' 
         ));
         assert.fileContent(expectedContent);
         done();
