@@ -18,8 +18,9 @@ gulp.task 'bs-reload', ->
   browserSync.reload()
 
 gulp.task 'sass', ->
-  gulp.src 'src/style.scss'
+  gulp.src config.src + '/styles/**/*.scss'
     .pipe $.plumber()
+    .pipe $.filter '**/style.scss'
     .pipe $.rubySass
       style: 'expanded'
     .pipe $.autoprefixer 'last 2 version', 'ie 8', 'ie 7'
@@ -41,7 +42,7 @@ gulp.task 'copy', ->
 
 gulp.task 'default', ['browser-sync'], ->
   gulp.watch config.src + '/**/*', ['bs-reload']
-  gulp.watch config.src + '/**/*.scss', ['sass', 'bs-reload']
+  gulp.watch config.src + '/styles/*.scss', ['sass', 'bs-reload']
   gulp.watch config.src + '/scripts/*.coffee', ['coffee', 'bs-reload']
 
 gulp.task 'build', ['sass', 'coffee', 'copy']

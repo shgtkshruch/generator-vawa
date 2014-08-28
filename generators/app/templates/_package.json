@@ -5,6 +5,7 @@
     "gulp-coffee": "*",
     "gulp-ruby-sass": "*",
     "gulp-autoprefixer": "*",
+    "gulp-filter": "*",
     "gulp-plumber": "*",
     "gulp-changed": "*",
     "gulp-load-plugins": "*",
