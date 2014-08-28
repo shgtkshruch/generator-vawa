@@ -1,4 +1,6 @@
 var yeoman = require('yeoman-generator');
+var exec = require('child_process').exec;
+var vagrantBoxes;
 
 module.exports = yeoman.generators.Base.extend({
 
@@ -7,18 +9,42 @@ module.exports = yeoman.generators.Base.extend({
     this.option('coffee');
   },
 
+  getVagrantBoxes: function() {
+    var done = this.async();
+    exec("vagrant box list | awk '{print $1}'", function(error, stdout, stderr) {
+      vagrantBoxes = stdout;
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+      done();
+    });
+  },
+
   askFor: function() {
     var done = this.async();
+    var boxChoices = [];
+
+    vagrantBoxes.split(/\n/).forEach(function(element, index, array) {
+      if (element !== '') {
+        boxChoices.push({name: element});
+      }
+    });
 
     var prompts = [{
       type: 'input',
       name: 'themeName',
       message: 'What yout theme name?',
       value: 'themeName'
-    }] 
+    }, {
+      type: 'list',
+      name: 'vagrantBox',
+      message: 'Which vagrant box do you use?',
+      choices: boxChoices
+    }];
 
     this.prompt(prompts, function(answers) {
       this.themeName = answers.themeName;
+      this.vagrantBox = answers.vagrantBox;
 
       done();
     }.bind(this));
@@ -38,6 +64,10 @@ module.exports = yeoman.generators.Base.extend({
 
   app: function() {
     this.template('style.scss', 'src/styles/style.scss');
+  },
+
+  vagrant: function() {
+    this.template('Vagrantfile', 'vagrant/Vagrantfile');
   },
 
   end: function() {
