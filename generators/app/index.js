@@ -37,9 +37,15 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   app: function() {
-    this.directory(this.themeName);
+    this.mkdir(this.themeName);
     this.mkdir('styles');
     this.template('style.scss', this.themeName + '/styles/style.scss');
+  },
+
+  end: function() {
+    if (!this.options['skip-vagrant']) {
+      this.spawnCommand('echo', ['vagrant up']);
+    }
   }
 
 });

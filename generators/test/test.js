@@ -21,6 +21,11 @@ describe('WordPress generator', function() {
       'gulpfile.coffee'
     ];
 
+  
+    var options = {
+      'skip-vagrant': true
+    };
+
     var runGen;
 
     beforeEach(function() {
@@ -31,7 +36,7 @@ describe('WordPress generator', function() {
     });
 
     it('creates expected files', function(done) {
-      runGen.withOptions().withPrompt({themeName: themeName}).on('end', function() {
+      runGen.withOptions(options).withPrompt({themeName: themeName}).on('end', function() {
         assert.file([].concat(
           expected,
           themeName + '/styles/style.scss' 
