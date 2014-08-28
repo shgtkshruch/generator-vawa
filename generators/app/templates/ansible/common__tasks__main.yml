@@ -1,0 +1,25 @@
+---
+- name: Update yum repository
+  yum: name=* state=latest
+
+- name: Install EPEL repository
+  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+- name: Install Remi repository
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+- name: Install packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - git
+    - libselinux-python
+
+- name: Copy bash_profile
+  copy: 
+    src=bash_profile
+    dest=~/.bash_profile
+    group={{ owner }}
+    owner={{ owner }}
+  sudo: no
+
+

@@ -1,0 +1,26 @@
+---
+- name: Install phpmyadmin
+  get_url:
+    url=http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/{{ phpmyadmin_version }}/phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
+    dest=/var/www/html
+
+- name: Untar the distribution
+  command: 
+    chdir=/var/www/html 
+    /bin/tar xzvf phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
+
+- name: Rename folder to phpmyadmin
+  command: 
+    chdir=/var/www/html 
+    /bin/mv phpMyAdmin-{{ phpmyadmin_version }}-all-languages phpmyadmin
+
+- name: Remove tar file
+  command: 
+    chdir=/var/www/html 
+    /bin/rm phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
+
+- name: Copy phpMyAdmin configuration file
+  copy: 
+    src=config.inc.php 
+    dest=/var/www/html/phpmyadmin/
+

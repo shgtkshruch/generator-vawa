@@ -1,0 +1,12 @@
+---
+- hosts: all
+  roles:
+    - { role: common, sudo: yes }
+    - { role: apache, sudo: yes }
+    - { role: php, sudo: yes }
+    - { role: mysql, sudo: yes }
+    - { role: phpmyadmin, sudo: yes }
+    - { role: peco, sudo: yes }
+    - { role: wp-cli, sudo: yes }
+    - { role: ip, sudo: no, when: env == "pro" }
+    - { role: wordpress, sudo: yes }

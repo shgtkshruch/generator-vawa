@@ -1,0 +1,58 @@
+---
+- name: Download Wordpress
+  get_url: 
+    url=http://ja.wordpress.org/wordpress-{{ wp_version }}-ja.tar.gz
+    dest=/var/www/html/wordpress-{{ wp_version }}-ja.tar.gz
+
+- name: Extract archive
+  command: chdir=/var/www/html /bin/tar xvf wordpress-{{ wp_version }}-ja.tar.gz
+
+- name: Remove tar file
+  command: chdir=/var/www/html /bin/rm wordpress-{{ wp_version }}-ja.tar.gz
+
+- name: Fetch random salts for Wordpress config
+  local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
+  register: "wp_salt"
+  sudo: no
+
+- name: Create Wordpress database
+  mysql_db: 
+    login_user=root
+    login_password={{ root_db_password }}
+    name={{ wp_db_name }} 
+    state=present
+
+- name: Create Wordpress database user
+  mysql_user: 
+    login_user=root
+    login_password={{ root_db_password }}
+    name={{ wp_db_user }} 
+    password={{ wp_db_password }} 
+    priv={{ wp_db_name }}.*:ALL,GRANT
+    host='localhost' 
+    state=present
+
+- name: Copy Wordpress config file
+  template: src=wp-config.php dest=/var/www/html/wordpress
+
+- name: Change ownership of Wordpress installation
+  file: path=/var/www/html/wordpress/ owner={{ owner }} group={{ owner }} state=directory recurse=yes
+
+- name: Install with wp-cli
+  command: wp core install --title={{ wp_title }} --admin_user={{ wp_user }} --admin_password={{ wp_password }} --admin_email={{ wp_mail }} --url={{ vagrant_ip }}/wordpress
+  sudo: no
+  when: env == "dev"
+
+- name: Install with wp-cli
+  command: wp core install --title={{ wp_title }} --admin_user={{ wp_user }} --admin_password={{ wp_password }} --admin_email={{ wp_mail }} --url={{ public_ip.stdout }}/wordpress
+  sudo: no
+  when: env == "pro"
+
+- name: Message
+  debug: msg="Please open http://{{ vagrant_ip }}/wordpress/wp-login.php.php with your browser to install WordPress"
+  when: env == "dev"
+
+- name: Message
+  debug: msg="Please open http://{{ public_ip.stdout }}/wordpress/wp-login.php with your browser to install WordPress"
+  sudo: no
+  when: env == "pro"

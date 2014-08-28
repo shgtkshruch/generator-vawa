@@ -1,0 +1,5 @@
+---
+- name: Install Apache
+  yum: name=httpd24
+  notify:
+    - restart httpd

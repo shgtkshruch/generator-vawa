@@ -1,0 +1,53 @@
+---
+- name: Install python module for MySQL
+  yum: name={{ item }}
+  with_items:
+    # for mysql_iser module
+    - MySQL-python
+
+- name: Install MySQL
+  yum: enablerepo=remi name={{ item }}
+  with_items:
+    - mysql-server
+
+- name: copy my.conf
+  copy: 
+    src=my.cnf 
+    dest=/etc/my.cnf 
+    mode=0644
+    owner=root 
+    group=root 
+
+- name: start MySQL service
+  service: 
+    name=mysqld 
+    state=started 
+    enabled=true
+
+- name: delete user
+  mysql_user: name="" host={{ item }} state=absent
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+
+- name: remove the test database
+  mysql_db: name=test state=absent
+
+- name: root password
+  mysql_user: 
+    name=root 
+    password={{ root_db_password }}
+
+- name: update mysql root password for all root accounts
+  mysql_user: 
+    login_user=root
+    login_password={{ root_db_password }}
+    name=root 
+    host={{ item }} 
+    password={{ root_db_password }}
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+

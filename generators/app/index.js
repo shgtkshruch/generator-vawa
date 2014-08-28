@@ -1,18 +1,22 @@
 var yeoman = require('yeoman-generator');
 var exec = require('child_process').exec;
-var vagrantBoxes;
+var fs = require('fs');
+var boxChoices = [];
 
 module.exports = yeoman.generators.Base.extend({
 
   constructor: function() {
     yeoman.generators.Base.apply(this, arguments);
-    this.option('coffee');
   },
 
   getVagrantBoxes: function() {
     var done = this.async();
     exec("vagrant box list | awk '{print $1}'", function(error, stdout, stderr) {
-      vagrantBoxes = stdout;
+      stdout.split(/\n/).forEach(function(element, index, array) {
+        if (element !== '') {
+          boxChoices.push({name: element});
+        }
+      });
       if (error !== null) {
         console.log('exec error: ' + error);
       }
@@ -22,13 +26,6 @@ module.exports = yeoman.generators.Base.extend({
 
   askFor: function() {
     var done = this.async();
-    var boxChoices = [];
-
-    vagrantBoxes.split(/\n/).forEach(function(element, index, array) {
-      if (element !== '') {
-        boxChoices.push({name: element});
-      }
-    });
 
     var prompts = [{
       type: 'input',
@@ -63,6 +60,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   app: function() {
+    this.mkdir(this.themeName);
     this.template('style.scss', 'src/styles/style.scss');
   },
 
@@ -70,9 +68,36 @@ module.exports = yeoman.generators.Base.extend({
     this.template('Vagrantfile', 'vagrant/Vagrantfile');
   },
 
+  ansible: function() {
+    var _this = this;
+
+    // get file list from ansible dir in sourceroot
+    fs.readdir(this.sourceRoot() + '/ansible', function(err, files) {
+      files.filter(function(file) {
+
+        // remove dotfiles
+        return file[0] !== '.'
+      }).forEach(function(file) {
+
+        // reame file ex. common__tasks__main.yml => common/tasks/main.yml
+        dest = file.replace(/__/g, "/");
+
+        // extract all in group_vars direcotry and playbook.yml
+        if (dest.indexOf("group_vars") === -1 && dest.indexOf("playbook") === -1) {
+
+         // add 'roles/' all files
+         dest = 'roles/' + dest;
+        }
+
+        // copy all ansible files with directory
+        _this.template('ansible/' + file, 'ansible/' + dest);
+      });
+    });
+  },
+
   end: function() {
     if (!this.options['skip-vagrant']) {
-      this.spawnCommand('echo', ['vagrant up']);
+      this.spawnCommand('vagrant', ['up', 'pro', '--provider=aws'], {cwd: this.destinationRoot() + '/vagrant'});
     }
   }
 

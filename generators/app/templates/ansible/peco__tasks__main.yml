@@ -1,0 +1,27 @@
+---
+- name: Install peco
+  get_url: 
+    url=https://github.com/peco/peco/releases/download/v{{ peco_version }}/peco_linux_amd64.tar.gz
+    dest=/home/{{ owner }}/peco_linux_amd64.tar.gz
+  
+- name: Untar
+  command: /bin/tar xvf peco_linux_amd64.tar.gz
+
+- name: Move binary
+  command: /bin/mv peco_linux_amd64/peco /usr/local/bin
+
+- name: Remove tar file
+  command: 
+    /bin/rm peco_linux_amd64.tar.gz
+  sudo: true
+
+- name: Remove directory
+  command: 
+    /bin/rm -rf peco_linux_amd64
+  sudo: true
+
+- name: Copy config file
+  copy:
+    src=config.json
+    dest=/home/{{ owner }}/.peco/
+

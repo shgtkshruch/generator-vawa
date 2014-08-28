@@ -1,0 +1,8 @@
+---
+- name: Get public ip address
+  command: /usr/bin/curl ifconfig.me
+  register: "public_ip"
+  sudo: no
+
+- name: Message
+  debug: msg="Public ip address is {{ public_ip.stdout }}"

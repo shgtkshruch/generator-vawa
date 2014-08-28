@@ -1,0 +1,23 @@
+---
+# Global Vars
+
+# WordPress
+wp_version: 3.9.2
+
+wp_title: my_site
+wp_user: wordpress
+wp_password: secret
+wp_mail: example@gmail.com
+
+wp_db_name: wordpress 
+wp_db_user: wordpress
+wp_db_password: secret
+
+# MySQL
+root_db_password: secret
+
+# phpMyAdmin
+phpmyadmin_version: 4.2.6
+
+# peco
+peco_version: 0.2.3

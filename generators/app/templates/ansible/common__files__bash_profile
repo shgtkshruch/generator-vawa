@@ -1,0 +1,67 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/bin
+
+export PATH
+
+# Alias # {{{
+
+# wp-cli
+alias amz="$HOME/bin/aws.sh"
+alias wpa="wp_plugin_activate"
+alias wpd="wp_plugin_deactivate"
+alias wpi="wp plugin install"
+alias wpl="wp plugin list"
+alias wps="wp plugin status"
+alias wpse="wp plugin search"
+alias wpu="wp_plugin_update"
+alias wpui="wp_plugin_uninstall"
+alias wta="wp_theme_activate"
+alias wti="wp theme install"
+alias wtui="wp_theme_uninstall"
+alias wts="wp theme status"
+alias wtl="wp theme list"
+alias wtse="wp theme search"
+alias wtu="wp_theme_update"
+# }}}
+
+# peco # {{{
+
+# plugin
+function wp_plugin_uninstall {
+  wp plugin delete $(wp plugin list | awk '{if($4 ~ /active/) print $2}' | peco)
+}
+
+function wp_plugin_activate {
+  wp plugin activate $(wp plugin status | awk '{if($1 ~ /I/) print $2}' | peco)
+}
+
+function wp_plugin_deactivate {
+  wp plugin deactivate $(wp plugin status | awk '{if($1 ~ /A/) print $2}' | peco)
+}
+
+function wp_plugin_update {
+  wp plugin update $(wp plugin status | awk '{if($1 ~ /U/) print $2}' | peco)
+}
+
+# theme
+function wp_theme_uninstall {
+  wp theme delete $(wp theme list | awk '{if($4 ~ /active/) print $2}' | peco)
+}
+
+function wp_theme_activate {
+  wp theme activate $(wp theme status | awk '{if($1 ~ /I/) print $2}' | peco)
+}
+
+function wp_theme_update {
+  wp plugin update $(wp plugin status | awk '{if($1 ~ /U/) print $2}' | peco)
+}
+# }}}
+

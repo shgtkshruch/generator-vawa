@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   src = "../<%= themeName %>"
-  dest = "/var/www/html/<%= themeName %>/wp-content/themes/<%= themeName %>"
+  dest = "/var/www/html/wordpress/wp-content/themes/<%= themeName %>"
 
   config.vm.define "dev" do |dev|
     dev.vm.box = "<%= vagrantBox %>"
@@ -15,8 +15,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.synced_folder src, dest, group: "apache", owner: "apache"
 
     dev.vm.provision "ansible" do |ansible|
-      ansible.playbook = "../ansible/dev/playbook.yml"
+      ansible.playbook = "../ansible/playbook.yml"
       ansible.sudo = false
+      ansible.extra_vars = {
+        env: "dev",
+        owner: "vagrant"
+      }
     end
   end
 
@@ -37,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.ami = "ami-e79cc4e6"
       
       aws.security_groups = ['vagrant']
-      aws.elastic_ip = true
+      # aws.elastic_ip = true
 
       aws.tags = {'Name' => 'vagrant-wordpress'}
 
@@ -46,11 +50,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     pro.vm.provision "ansible" do |ansible|
-      ansible.playbook = "../ansible/pro/playbook.yml"
+      ansible.playbook = "../ansible/playbook.yml"
       ansible.sudo = false
+      ansible.extra_vars = {
+        env: "pro",
+        owner: "ec2-user"
+      }
     end
 
   end
-
 end
 

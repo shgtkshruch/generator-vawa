@@ -1,0 +1,22 @@
+---
+- name: Install PHP
+  yum: enablerepo=remi,remi-php55 name={{ item }}
+  with_items:
+    - php
+    - php-devel
+    - php-mysqlnd
+    - php-mbstring
+    - php-gd
+    - php-opcache
+  when: env == "dev"
+
+- name: Install PHP
+  yum: name={{ item }}
+  with_items:
+    - php55
+    - php55-devel
+    - php55-mysqlnd
+    - php55-mbstring
+    - php55-gd
+    - php55-opcache
+  when: env == "pro"
