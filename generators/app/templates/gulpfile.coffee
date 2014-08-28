@@ -6,7 +6,7 @@ browserSync = require 'browser-sync'
 
 config = 
   theme: '<%= themeName %>'
-  src: 'src'
+  src: './src'
 
 gulp.task 'browser-sync', ->
   browserSync
@@ -27,6 +27,14 @@ gulp.task 'sass', ->
     .pipe browserSync.reload
       stream: true
 
+gulp.task 'coffee', ->
+  gulp.src config.src + '/scripts/*.coffee'
+    .pipe $.plumber()
+    .pipe $.changed config.theme,
+      extension: '.js'
+    .pipe $.coffee()
+    .pipe gulp.dest config.theme
+
 gulp.task 'copy', ->
   gulp.src config.src + '/**/*.php'
     .pipe gulp.dest config.theme
@@ -34,6 +42,7 @@ gulp.task 'copy', ->
 gulp.task 'default', ['browser-sync'], ->
   gulp.watch config.src + '/**/*', ['bs-reload']
   gulp.watch config.src + '/**/*.scss', ['sass', 'bs-reload']
+  gulp.watch config.src + '/scripts/*.coffee', ['coffee', 'bs-reload']
 
-gulp.task 'build', ['sass', 'copy']
+gulp.task 'build', ['sass', 'coffee', 'copy']
 

@@ -6,6 +6,7 @@
     "gulp-ruby-sass": "*",
     "gulp-autoprefixer": "*",
     "gulp-plumber": "*",
+    "gulp-changed": "*",
     "gulp-load-plugins": "*",
     "browser-sync": "*",
     "coffee-script": "*"
