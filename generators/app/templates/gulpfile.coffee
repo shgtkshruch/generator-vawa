@@ -5,12 +5,13 @@ $ = require('gulp-load-plugins')()
 browserSync = require 'browser-sync'
 
 config = 
-  SOURCE: '<%= themeName %>'
+  theme: '<%= themeName %>'
+  src: 'src'
 
 gulp.task 'browser-sync', ->
   browserSync
-    files: config.SOURCE + '/*'
-    proxy: '192.168.33.10/' + config.SOURCE + '/'
+    files: config.theme + '/*'
+    proxy: '192.168.33.10/' + config.theme + '/'
     notify: false
 
 gulp.task 'bs-reload', ->
@@ -22,10 +23,10 @@ gulp.task 'sass', ->
     .pipe $.rubySass
       style: 'expanded'
     .pipe $.autoprefixer 'last 2 version', 'ie 8', 'ie 7'
-    .pipe gulp.dest 'mytheme'
+    .pipe gulp.dest config.theme
     .pipe browserSync.reload
       stream: true
 
 gulp.task 'default', ['browser-sync'], ->
-  gulp.watch config.SOURCE + '/**/*', ['bs-reload']
-  gulp.watch 'src/*', ['sass', 'bs-reload']
+  gulp.watch config.src + '/**/*', ['bs-reload']
+  gulp.watch config.src + '/**/*.scss', ['sass', 'bs-reload']
