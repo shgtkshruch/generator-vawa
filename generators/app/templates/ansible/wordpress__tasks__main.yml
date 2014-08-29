@@ -41,18 +41,18 @@
 - name: Install with wp-cli
   command: wp core install --title={{ wp_title }} --admin_user={{ wp_user }} --admin_password={{ wp_password }} --admin_email={{ wp_mail }} --url={{ vagrant_ip }}/wordpress
   sudo: no
-  when: env == "dev"
+  when: env == "local"
 
 - name: Install with wp-cli
   command: wp core install --title={{ wp_title }} --admin_user={{ wp_user }} --admin_password={{ wp_password }} --admin_email={{ wp_mail }} --url={{ public_ip.stdout }}/wordpress
   sudo: no
-  when: env == "pro"
+  when: env == "aws"
 
 - name: Message
   debug: msg="Please open http://{{ vagrant_ip }}/wordpress/wp-login.php.php with your browser to install WordPress"
-  when: env == "dev"
+  when: env == "local"
 
 - name: Message
   debug: msg="Please open http://{{ public_ip.stdout }}/wordpress/wp-login.php with your browser to install WordPress"
   sudo: no
-  when: env == "pro"
+  when: env == "aws"

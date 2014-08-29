@@ -8,5 +8,5 @@
     - { role: phpmyadmin, sudo: yes }
     - { role: peco, sudo: yes }
     - { role: wp-cli, sudo: yes }
-    - { role: ip, sudo: no, when: env == "pro" }
+    - { role: ip, sudo: no, when: env == "aws" }
     - { role: wordpress, sudo: yes }

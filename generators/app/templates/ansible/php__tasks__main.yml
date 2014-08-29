@@ -8,7 +8,7 @@
     - php-mbstring
     - php-gd
     - php-opcache
-  when: env == "dev"
+  when: env == "local"
 
 - name: Install PHP
   yum: name={{ item }}
@@ -19,4 +19,4 @@
     - php55-mbstring
     - php55-gd
     - php55-opcache
-  when: env == "pro"
+  when: env == "aws"
