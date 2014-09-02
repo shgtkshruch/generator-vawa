@@ -62,6 +62,7 @@ module.exports = yeoman.generators.Base.extend({
   app: function() {
     this.mkdir(this.themeName);
     this.template('style.scss', 'src/styles/style.scss');
+    this.copy('Gemfile', 'Gemfile');
   },
 
   vagrant: function() {
@@ -69,6 +70,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   ansible: function() {
+    console.log('ansible');
     var _this = this;
 
     // get file list from ansible dir in sourceroot
@@ -96,6 +98,9 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   end: function() {
+    if (!this.options['skip-bundle']) {
+      this.spawnCommand('bundle', ['install', '--path', 'vendor/bundle']);
+    }
     if (!this.options['skip-vagrant']) {
       this.spawnCommand('vagrant', ['up', 'pro', '--provider=aws'], {cwd: this.destinationRoot() + '/vagrant'});
     }

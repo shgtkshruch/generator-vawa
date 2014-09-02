@@ -23,6 +23,8 @@ gulp.task 'sass', ->
     .pipe $.filter '**/style.scss'
     .pipe $.rubySass
       style: 'expanded'
+      require: ['bourbon', 'breakpoint']
+      bundleExec: true
     .pipe $.autoprefixer 'last 2 version', 'ie 8', 'ie 7'
     .pipe gulp.dest config.theme
     .pipe browserSync.reload

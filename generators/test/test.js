@@ -25,7 +25,8 @@ describe('WordPress generator', function() {
     ];
   
     var options = {
-      'skip-vagrant': true
+      'skip-vagrant': true,
+      'skip-bundle': true
     };
 
     var prompts = {
@@ -47,6 +48,7 @@ describe('WordPress generator', function() {
         assert.file([].concat(
           expected,
           'src/styles/style.scss',
+          'Gemfile',
           'vagrant/Vagrantfile',
           'ansible/roles/apache/handlers/main.yml',
           'ansible/roles/apache/tasks/main.yml',
