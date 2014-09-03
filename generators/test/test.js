@@ -25,6 +25,8 @@ describe('WordPress generator', function() {
     ];
   
     var options = {
+      'skip-install': true,
+      'skip-install-message': true,
       'skip-vagrant': true,
       'skip-bundle': true
     };

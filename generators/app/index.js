@@ -97,6 +97,15 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
+  install: function() {
+    if (!this.options['skip-install']) {
+      this.installDependencies({
+        skipInstall: this.options['skip-install-message'],
+        skipInstall: this.options['skip-install']
+      });
+    }
+  },
+
   end: function() {
     if (!this.options['skip-bundle']) {
       this.spawnCommand('bundle', ['install', '--path', 'vendor/bundle']);
