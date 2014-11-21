@@ -2,21 +2,22 @@
   "name": "generator-wordpress-vagrant-ansible-aws",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/shgtkshruch/generator-wordpress-vagrant-ansible-aws.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/shgtkshruch/generator-wordpress-vagrant-ansible-aws/issues"
   },
   "homepage": "https://github.com/shgtkshruch/generator-wordpress-vagrant-ansible-aws",
   "devDependencies": {
-    "yeoman-generator": "^0.17.3"
+    "mocha": "^2.0.1",
+    "yeoman-generator": "^0.18.0"
   }
 }
