@@ -9,7 +9,7 @@
     "gulp-plumber": "*",
     "gulp-changed": "*",
     "gulp-load-plugins": "*",
-    "browser-sync": "*",
+    "browser-sync": "*"
   },
   "engines": {
     "node": ">=0.10.0"
