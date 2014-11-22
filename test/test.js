@@ -13,7 +13,7 @@ describe('vawa generator', function() {
     var vagrantExp = new RegExp('dev.vm.box = "' +  vagrantBox);
 
     var expectedContent = [
-      ['gulpfile.coffee', gulpExp],
+      ['gulpfile.js', gulpExp],
       ['src/styles/style.scss', themeExp],
       ['vagrant/Vagrantfile', vagrantExp]
     ];
@@ -21,14 +21,13 @@ describe('vawa generator', function() {
     var expected = [
       'package.json',
       '.gitignore',
-      'gulpfile.coffee'
+      'gulpfile.js'
     ];
   
     var options = {
       'skip-install': true,
       'skip-install-message': true,
-      'skip-vagrant': true,
-      'skip-bundle': true
+      'skip-vagrant': true
     };
 
     var prompts = {
@@ -50,7 +49,6 @@ describe('vawa generator', function() {
         assert.file([].concat(
           expected,
           'src/styles/style.scss',
-          'Gemfile',
           'vagrant/Vagrantfile',
           'ansible/roles/apache/handlers/main.yml',
           'ansible/roles/apache/tasks/main.yml',
