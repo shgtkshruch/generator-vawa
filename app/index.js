@@ -1,6 +1,7 @@
 var yeoman = require('yeoman-generator');
 var exec = require('child_process').exec;
 var fs = require('fs');
+var each = require('each-async');
 var boxChoices = [];
 
 module.exports = yeoman.generators.Base.extend({
@@ -28,7 +29,6 @@ module.exports = yeoman.generators.Base.extend({
 
   askFor: function() {
     var done = this.async();
-
     var prompts = [{
       type: 'input',
       name: 'themeName',
@@ -44,7 +44,6 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function(answers) {
       this.themeName = answers.themeName;
       this.vagrantBox = answers.vagrantBox;
-
       done();
     }.bind(this));
   },
@@ -71,32 +70,22 @@ module.exports = yeoman.generators.Base.extend({
     this.template('Vagrantfile', 'vagrant/Vagrantfile');
   },
 
-  // ansible: function() {
-  //   var _this = this;
-  //
-  //   // get file list from ansible dir in sourceroot
-  //   fs.readdir(this.sourceRoot() + '/ansible', function(err, files) {
-  //     files.filter(function(file) {
-  //
-  //       // remove dotfiles
-  //       return file[0] !== '.';
-  //     }).forEach(function(file) {
-  //
-  //       // reame file ex. common__tasks__main.yml => common/tasks/main.yml
-  //       dest = file.replace(/__/g, "/");
-  //
-  //       // extract all in group_vars direcotry and playbook.yml
-  //       if (dest.indexOf("group_vars") === -1 && dest.indexOf("playbook") === -1) {
-  //
-  //        // add 'roles/' all files
-  //        dest = 'roles/' + dest;
-  //       }
-  //
-  //       // copy all ansible files with directory
-  //       _this.template('ansible/' + file, 'ansible/' + dest);
-  //     });
-  //   });
-  // }
+  ansible: function () {
+    var files = fs.readdirSync(this.sourceRoot() + '/ansible');
+
+    each(files, function (file, i, next) {
+      var dest = file.replace(/__/g, '/');
+
+      if (!/group_vars|playbook/.test(dest)) {
+        dest = 'roles/' + dest;
+      }
+
+      this.bulkCopy('ansible/' + file, 'ansible/' + dest);
+      next();
+    }.bind(this), function (err) {
+      if (err) throw err;
+    });
+  },
 
   install: function() {
     if (!this.options['skip-install']) {
@@ -117,3 +106,4 @@ module.exports = yeoman.generators.Base.extend({
   }
 
 });
+
