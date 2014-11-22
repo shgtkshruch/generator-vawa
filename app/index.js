@@ -57,7 +57,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   gulp: function() {
-    this.template('gulpfile.coffee', 'gulpfile.coffee');
+    this.template('gulpfile.js', 'gulpfile.js');
   },
 
   app: function() {

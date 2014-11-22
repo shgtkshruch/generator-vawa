@@ -3,14 +3,13 @@
   "devDependencies": {
     "gulp": "*",
     "gulp-coffee": "*",
-    "gulp-ruby-sass": "*",
+    "gulp-sass": "*",
     "gulp-autoprefixer": "*",
     "gulp-filter": "*",
     "gulp-plumber": "*",
     "gulp-changed": "*",
     "gulp-load-plugins": "*",
     "browser-sync": "*",
-    "coffee-script": "*"
   },
   "engines": {
     "node": ">=0.10.0"
