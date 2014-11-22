@@ -2,7 +2,7 @@
 # Global Vars
 
 # WordPress
-wp_version: 3.9.2
+wp_version: 4.0
 
 wp_title: my_site
 wp_user: wordpress
@@ -17,7 +17,7 @@ wp_db_password: secret
 root_db_password: secret
 
 # phpMyAdmin
-phpmyadmin_version: 4.2.6
+phpmyadmin_version: 4.2.12
 
 # peco
-peco_version: 0.2.3
+peco_version: 0.2.10
