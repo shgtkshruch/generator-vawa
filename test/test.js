@@ -2,7 +2,7 @@ var path = require('path');
 var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
 
-describe('WordPress generator', function() {
+describe('vawa generator', function() {
 
   describe('run test', function() {
     var themeName = 'my_wordpress_theme';
@@ -38,15 +38,15 @@ describe('WordPress generator', function() {
 
     before(function(done) {
       helpers.testDirectory(path.join(__dirname, '.tmp'), function () {
-        this.Gen = helpers.createGenerator('wordpress-vagrant-ansible-aws', ['../../app']);
-        this.Gen.options = options;
-        helpers.mockPrompt(this.Gen, prompts);
+        this.vawa = helpers.createGenerator('vawa', ['../../app']);
+        this.vawa.options = options;
+        helpers.mockPrompt(this.vawa, prompts);
         done();
       }.bind(this));
     });
 
     it('creates expected files', function(done) {
-      this.Gen.run({}, function() {
+      this.vawa.run({}, function() {
         assert.file([].concat(
           expected,
           'src/styles/style.scss',

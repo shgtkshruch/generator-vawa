@@ -1,5 +1,5 @@
 {
-  "name": "generator-wordpress-vagrant-ansible-aws",
+  "name": "generator-vawa",
   "version": "0.0.0",
   "description": "",
   "main": "app/index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shgtkshruch/generator-wordpress-vagrant-ansible-aws.git"
+    "url": "https://github.com/shgtkshruch/generator-vawa.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shgtkshruch/generator-wordpress-vagrant-ansible-aws/issues"
+    "url": "https://github.com/shgtkshruch/generator-vawa/issues"
   },
-  "homepage": "https://github.com/shgtkshruch/generator-wordpress-vagrant-ansible-aws",
+  "homepage": "https://github.com/shgtkshruch/generator-vawa",
   "devDependencies": {
     "mocha": "^2.0.1",
     "yeoman-generator": "^0.18.0"

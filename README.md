@@ -1,1 +1,1 @@
-# generator-wordpress-vagrant-ansible-aws
+# generator-vawa
