@@ -69,21 +69,8 @@ module.exports = yeoman.generators.Base.extend({
     this.template('Vagrantfile', 'vagrant/Vagrantfile');
   },
 
-  ansible: function () {
-    var files = fs.readdirSync(this.sourceRoot() + '/ansible');
-
-    each(files, function (file, i, next) {
-      var dest = file.replace(/__/g, '/');
-
-      if (!/group_vars|playbook/.test(dest)) {
-        dest = 'roles/' + dest;
-      }
-
-      this.bulkCopy('ansible/' + file, 'ansible/' + dest);
-      next();
-    }.bind(this), function (err) {
-      if (err) throw err;
-    });
+  ansible: function() {
+    this.bulkDirectory('ansible', 'ansible');
   },
 
   install: function() {
