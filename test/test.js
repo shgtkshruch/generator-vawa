@@ -23,11 +23,10 @@ describe('vawa generator', function() {
       '.gitignore',
       'gulpfile.js'
     ];
-  
+
     var options = {
       'skip-install': true,
-      'skip-install-message': true,
-      'skip-vagrant': true
+      'skip-install-message': true
     };
 
     var prompts = {

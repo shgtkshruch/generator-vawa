@@ -11,7 +11,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   getVagrantBoxes: function() {
-    if (!this.options['skip-vagrant']) {
+    if (!this.options['skip-install']) {
       var done = this.async();
       exec("vagrant box list | awk '{print $1}'", function(error, stdout, stderr) {
         stdout.split(/\n/).forEach(function(element, index, array) {
@@ -95,13 +95,6 @@ module.exports = yeoman.generators.Base.extend({
         skipMessage: this.options['skip-install-message']
       });
     }
-  },
-
-  end: function() {
-    if (!this.options['skip-vagrant']) {
-      this.spawnCommand('vagrant', ['up', 'pro', '--provider=aws'], {cwd: this.destinationRoot() + '/vagrant'});
-    }
   }
-
 });
 
