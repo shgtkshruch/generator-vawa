@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.box = "<%= vagrantBox %>"
     dev.vm.box_url = "(virtualbox,"
     dev.vm.network "private_network", ip: "192.168.33.10"
-    dev.vm.synced_folder src, dest, group: "apache", owner: "apache"
+    # dev.vm.synced_folder src, dest, group: "apache", owner: "apache"
 
     dev.vm.provision "ansible" do |ansible|
       ansible.playbook = "../ansible/playbook.yml"
@@ -39,7 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.region = "ap-northeast-1"
 
       aws.ami = "ami-e79cc4e6"
-      
+
       aws.security_groups = ['vagrant']
       # aws.elastic_ip = true
 
