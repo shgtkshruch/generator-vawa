@@ -47,7 +47,8 @@ describe('vawa generator', function() {
 
     var options = {
       'skip-install': true,
-      'skip-install-message': true
+      'skip-install-message': true,
+      'test': true
     };
 
     var prompts = {
