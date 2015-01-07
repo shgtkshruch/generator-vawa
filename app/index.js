@@ -66,11 +66,14 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   vagrant: function() {
+    this.vagrantIp = '192.168.33.10';
     this.template('Vagrantfile', 'vagrant/Vagrantfile');
   },
 
   ansible: function() {
-    this.bulkDirectory('ansible', 'ansible');
+    this.copy('ansible/playbook.yml', 'ansible/playbook.yml');
+    this.copy('ansible/group_vars/all', 'ansible/group_vars/all');
+    this.bulkDirectory('ansible/roles', 'ansible/roles');
   },
 
   install: function() {

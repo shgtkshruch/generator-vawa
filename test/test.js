@@ -15,7 +15,9 @@ describe('vawa generator', function() {
     var expectedContent = [
       ['gulpfile.js', gulpExp],
       ['src/styles/style.scss', themeExp],
-      ['vagrant/Vagrantfile', vagrantExp]
+      ['vagrant/Vagrantfile', vagrantExp],
+      ['vagrant/Vagrantfile', /dev\.vm\.network "private_network", ip: 192\.168\.33\.10/],
+      ['ansible/group_vars/all', /vagrant_ip: 192\.168\.33\.10/]
     ];
 
     var expected = [

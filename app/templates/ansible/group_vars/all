@@ -1,5 +1,6 @@
 ---
 # Global Vars
+vagrant_ip: <%= vagrantIp %>
 
 # WordPress
 wp_version: 4.0
