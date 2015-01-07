@@ -27,7 +27,6 @@ describe('vawa generator', function() {
     ];
 
     var ansible = [
-      'ansible/roles/apache/handlers/main.yml',
       'ansible/roles/apache/tasks/main.yml',
       'ansible/roles/common/files/bash_profile',
       'ansible/roles/common/tasks/main.yml',
