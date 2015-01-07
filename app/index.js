@@ -11,20 +11,18 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   getVagrantBoxes: function() {
-    if (!this.options['skip-install']) {
-      var done = this.async();
-      exec("vagrant box list | awk '{print $1}'", function(error, stdout, stderr) {
-        stdout.split(/\n/).forEach(function(element, index, array) {
-          if (element !== '') {
-            boxChoices.push({name: element});
-          }
-        });
-        if (error !== null) {
-          console.log('exec error: ' + error);
+    var done = this.async();
+    exec("vagrant box list | awk '{print $1}'", function(error, stdout, stderr) {
+      stdout.split(/\n/).forEach(function(element, index, array) {
+        if (element !== '') {
+          boxChoices.push({name: element});
         }
-        done();
       });
-    }
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+      done();
+    });
   },
 
   askFor: function() {
