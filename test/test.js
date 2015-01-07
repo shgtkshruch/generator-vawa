@@ -27,6 +27,8 @@ describe('vawa generator', function() {
     ];
 
     var ansible = [
+      'ansible/hosts',
+      'ansible/playbook.yml',
       'ansible/roles/apache/tasks/main.yml',
       'ansible/roles/common/files/bash_profile',
       'ansible/roles/common/tasks/main.yml',
@@ -39,7 +41,6 @@ describe('vawa generator', function() {
       'ansible/roles/php/tasks/main.yml',
       'ansible/roles/phpmyadmin/files/config.inc.php',
       'ansible/roles/phpmyadmin/tasks/main.yml',
-      'ansible/playbook.yml',
       'ansible/roles/wordpress/tasks/main.yml',
       'ansible/roles/wordpress/templates/wp-config.php',
       'ansible/roles/wp-cli/tasks/main.yml',

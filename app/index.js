@@ -71,6 +71,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   ansible: function() {
+    this.copy('ansible/hosts', 'ansible/hosts');
     this.copy('ansible/playbook.yml', 'ansible/playbook.yml');
     this.copy('ansible/group_vars/all', 'ansible/group_vars/all');
     this.bulkDirectory('ansible/roles', 'ansible/roles');
