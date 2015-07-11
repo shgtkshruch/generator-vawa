@@ -1,7 +1,7 @@
 ---
 - name: Install phpmyadmin
   get_url:
-    url=http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/{{ phpmyadmin_version }}/phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
+    url=https://files.phpmyadmin.net/phpMyAdmin/{{ phpmyadmin_version }}/phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
     dest=/var/www/html
 
 - name: Untar the distribution

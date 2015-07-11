@@ -18,7 +18,7 @@ wp_db_password: secret
 root_db_password: secret
 
 # phpMyAdmin
-phpmyadmin_version: 4.2.12
+phpmyadmin_version: 4.4.11
 
 # peco
 peco_version: 0.2.10
