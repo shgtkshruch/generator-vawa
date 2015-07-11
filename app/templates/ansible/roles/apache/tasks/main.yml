@@ -9,5 +9,3 @@
   notify: restart httpd
   when: env == "local"
 
-- name: restart httpd
-  service: name=httpd state=started enabled=yes
