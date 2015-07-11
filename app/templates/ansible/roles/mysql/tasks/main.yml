@@ -11,17 +11,17 @@
     - mysql-server
 
 - name: copy my.conf
-  copy: 
-    src=my.cnf 
-    dest=/etc/my.cnf 
+  copy:
+    src=my.cnf
+    dest=/etc/my.cnf
     mode=0644
-    owner=root 
-    group=root 
+    owner=root
+    group=root
 
 - name: start MySQL service
-  service: 
-    name=mysqld 
-    state=started 
+  service:
+    name=mysqld
+    state=started
     enabled=true
 
 - name: delete user
@@ -35,16 +35,16 @@
   mysql_db: name=test state=absent
 
 - name: root password
-  mysql_user: 
-    name=root 
+  mysql_user:
+    name=root
     password={{ root_db_password }}
 
 - name: update mysql root password for all root accounts
-  mysql_user: 
+  mysql_user:
     login_user=root
     login_password={{ root_db_password }}
-    name=root 
-    host={{ item }} 
+    name=root
+    host={{ item }}
     password={{ root_db_password }}
   with_items:
     - "{{ ansible_hostname }}"

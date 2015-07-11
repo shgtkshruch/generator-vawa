@@ -15,7 +15,7 @@
     - libselinux-python
 
 - name: Copy bash_profile
-  copy: 
+  copy:
     src=bash_profile
     dest=~/.bash_profile
     group={{ owner }}

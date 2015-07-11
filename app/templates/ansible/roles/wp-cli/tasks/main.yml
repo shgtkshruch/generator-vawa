@@ -1,6 +1,6 @@
 ---
 - name: Install wp-cli.phar
-  get_url: 
+  get_url:
     url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     dest=/usr/local/bin/wp
     mode=755
@@ -9,8 +9,8 @@
   command: chdir=/home/{{ owner }} /bin/mkdir .wp-cli
 
 - name: Copy wp-cli configure file
-  copy: 
-    src=config.yml 
-    dest=/home/{{ owner }}/.wp-cli/ 
+  copy:
+    src=config.yml
+    dest=/home/{{ owner }}/.wp-cli/
     group={{ owner }}
     owner={{ owner }}
