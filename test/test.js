@@ -73,7 +73,7 @@ describe('vawa generator', function() {
         assert.file([].concat(
           expected,
           'src/index.php',
-          'src/function.php',
+          'src/functions.php',
           'src/styles/style.scss',
           'Vagrantfile',
           ansible
