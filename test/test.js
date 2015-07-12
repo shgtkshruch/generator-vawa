@@ -16,8 +16,8 @@ describe('vawa generator', function() {
       ['gulpfile.js', gulpExp],
       ['gulpfile.js', /proxy: '192\.168\.33\.10\/wordpress'/],
       ['src/styles/style.scss', themeExp],
-      ['vagrant/Vagrantfile', vagrantExp],
-      ['vagrant/Vagrantfile', /dev\.vm\.network "private_network", ip: "192\.168\.33\.10"/],
+      ['Vagrantfile', vagrantExp],
+      ['Vagrantfile', /dev\.vm\.network "private_network", ip: "192\.168\.33\.10"/],
       ['ansible/group_vars/all', /vagrant_ip: 192\.168\.33\.10/]
     ];
 
@@ -73,7 +73,7 @@ describe('vawa generator', function() {
         assert.file([].concat(
           expected,
           'src/styles/style.scss',
-          'vagrant/Vagrantfile',
+          'Vagrantfile',
           ansible
         ));
         assert.fileContent(expectedContent);

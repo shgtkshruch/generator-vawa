@@ -63,7 +63,7 @@ module.exports = yeoman.generators.Base.extend({
 
   vagrant: function() {
     this.vagrantIp = '192.168.33.10';
-    this.template('Vagrantfile', 'vagrant/Vagrantfile');
+    this.template('Vagrantfile', 'Vagrantfile');
   },
 
   gulp: function() {
