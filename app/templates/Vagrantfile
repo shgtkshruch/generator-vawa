@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.box = "<%= vagrantBox %>"
     dev.vm.box_url = "(virtualbox,"
     dev.vm.network "private_network", ip: "<%= vagrantIp %>"
-    # dev.vm.synced_folder src, dest, group: "apache", owner: "apache"
+    dev.vm.synced_folder src, dest, group: "vagrant", owner: "vagrant"
 
     dev.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbook.yml"
