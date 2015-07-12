@@ -56,10 +56,6 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('gitignore', '.gitignore');
   },
 
-  gulp: function() {
-    this.template('gulpfile.js', 'gulpfile.js');
-  },
-
   app: function() {
     this.mkdir(this.themeName);
     this.template('style.scss', 'src/styles/style.scss');
@@ -68,6 +64,10 @@ module.exports = yeoman.generators.Base.extend({
   vagrant: function() {
     this.vagrantIp = '192.168.33.10';
     this.template('Vagrantfile', 'vagrant/Vagrantfile');
+  },
+
+  gulp: function() {
+    this.template('gulpfile.js', 'gulpfile.js');
   },
 
   ansible: function() {

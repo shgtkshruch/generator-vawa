@@ -8,12 +8,13 @@ describe('vawa generator', function() {
     var themeName = 'my_wordpress_theme';
     var vagrantBox = 'wordpress_box';
 
-    var gulpExp = new RegExp('theme: \'' + themeName + '\'');
+    var gulpExp = new RegExp('dest: \'' + themeName + '\'');
     var themeExp = new RegExp('Theme Name: ' + themeName);
     var vagrantExp = new RegExp('dev.vm.box = "' +  vagrantBox);
 
     var expectedContent = [
       ['gulpfile.js', gulpExp],
+      ['gulpfile.js', /proxy: '192\.168\.33\.10\/wordpress'/],
       ['src/styles/style.scss', themeExp],
       ['vagrant/Vagrantfile', vagrantExp],
       ['vagrant/Vagrantfile', /dev\.vm\.network "private_network", ip: "192\.168\.33\.10"/],

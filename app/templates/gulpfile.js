@@ -12,12 +12,7 @@ gulp.task('browserSync', function () {
     watchOptions: {
       debounceDelay: 0
     },
-    server: {
-      baseDir: config.dest,
-      routes: {
-        '/bower_components': 'bower_components'
-      }
-    },
+    proxy: '<%= vagrantIp %>/wordpress',
     notify: false,
     reloadDelay: 0
   });
