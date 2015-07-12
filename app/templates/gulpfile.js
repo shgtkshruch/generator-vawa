@@ -3,8 +3,8 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 
 var config = {
-  theme: '<%= themeName %>',
-  src: './src'
+  src: 'src',
+  dest: '<%= themeName %>',
 };
 
 gulp.task('browserSync', function () {
@@ -13,7 +13,7 @@ gulp.task('browserSync', function () {
       debounceDelay: 0
     },
     server: {
-      baseDir: config.theme,
+      baseDir: config.dest,
       routes: {
         '/bower_components': 'bower_components'
       }
@@ -24,14 +24,13 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('sass', function () {
-  gulp.src(config.src + '/styles/**/*.scss')
+  gulp.src(config.src + '/styles/style.scss')
     .pipe($.plumber())
-    .pipe($.filter('**/style.scss'))
     .pipe($.sass())
     .pipe($.autoprefixer({
       browsers: ['last 2 version', 'ie 9', 'ie 8']
     }))
-    .pipe(gulp.dest(config.dest + '/styles'))
+    .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream: true}));
 });
 
@@ -46,13 +45,13 @@ gulp.task('coffee', function () {
 
 gulp.task('php', function () {
   gulp.src(config.src + '/**/*.php')
-    .pipe(gulp.dest(config.theme));
+    .pipe(gulp.dest(config.dest));
 });
 
 gulp.task('default', ['browserSync'], function () {
-  gulp.watch(config.src + '/styles/*.scss', ['sass']);
+  gulp.watch(config.src + '/*.php', ['php']);
+  gulp.watch(config.src + '/styles/**/*.scss', ['sass']);
   gulp.watch(config.src + '/scripts/*.coffee', ['coffee']);
 });
 
 gulp.task('build', ['php', 'sass', 'coffee']);
-
