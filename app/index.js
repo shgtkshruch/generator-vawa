@@ -60,6 +60,7 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir(this.themeName);
     this.template('index.php', 'src/index.php');
     this.template('style.scss', 'src/styles/style.scss');
+    this.copy('functions.php', 'src/function.php');
   },
 
   vagrant: function() {
