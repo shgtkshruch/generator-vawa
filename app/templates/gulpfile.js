@@ -14,7 +14,8 @@ gulp.task('browserSync', function () {
     },
     proxy: '<%= vagrantIp %>/wordpress',
     notify: false,
-    reloadDelay: 0
+    reloadDelay: 0,
+    browser: 'Google Chrome Canary'
   });
 });
 
