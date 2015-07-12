@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vbguest.auto_update = false
 
-  src = "../<%= themeName %>"
+  src = "./<%= themeName %>"
   dest = "/var/www/html/wordpress/wp-content/themes/<%= themeName %>"
 
   config.vm.define "dev" do |dev|
