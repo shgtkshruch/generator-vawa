@@ -41,6 +41,7 @@ gulp.task('coffee', function () {
 
 gulp.task('php', function () {
   gulp.src(config.src + '/**/*.php')
+    .pipe($.changed(config.dest))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream: true}));
 });
