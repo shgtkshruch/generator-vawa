@@ -33,7 +33,7 @@ gulp.task('sass', function () {
 gulp.task('coffee', function () {
   gulp.src(config.src + '/scripts/*.coffee')
     .pipe($.plumber())
-    .pipe($.changed(config.theme, {extension: '.js'}))
+    .pipe($.changed(config.dest, {extension: '.js'}))
     .pipe($.coffee())
     .pipe(gulp.dest(config.dest + '/scripts'))
     .pipe(browserSync.reload({stream: true}));
