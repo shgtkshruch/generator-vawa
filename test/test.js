@@ -73,6 +73,8 @@ describe('vawa generator', function() {
         assert.file([].concat(
           expected,
           'src/index.php',
+          'src/header.php',
+          'src/footer.php',
           'src/functions.php',
           'src/styles/style.scss',
           'Vagrantfile',

@@ -59,6 +59,8 @@ module.exports = yeoman.generators.Base.extend({
   app: function() {
     this.mkdir(this.themeName);
     this.template('index.php', 'src/index.php');
+    this.template('header.php', 'src/header.php');
+    this.template('footer.php', 'src/footer.php');
     this.template('style.scss', 'src/styles/style.scss');
     this.copy('functions.php', 'src/functions.php');
   },
