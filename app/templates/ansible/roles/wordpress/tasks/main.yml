@@ -49,7 +49,7 @@
   when: env == "aws"
 
 - name: Message
-  debug: msg="Please open http://{{ vagrant_ip }}/wordpress/wp-login.php.php with your browser to install WordPress"
+  debug: msg="Please open http://{{ vagrant_ip }}/wordpress/wp-login.php with your browser to install WordPress"
   when: env == "local"
 
 - name: Message
