@@ -3,7 +3,7 @@
 vagrant_ip: <%= vagrantIp %>
 
 # WordPress
-wp_version: 4.2.2
+wp_version: 4.2.3
 
 wp_title: my_site
 wp_user: wordpress
