@@ -3,6 +3,7 @@
   get_url:
     url=https://files.phpmyadmin.net/phpMyAdmin/{{ phpmyadmin_version }}/phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
     dest=/var/www/html
+    validate_certs=no
 
 - name: Untar the distribution
   command:
